@@ -1,0 +1,132 @@
+
+@use "./app.scss";
+@use "./login.scss";
+@use "./toasts.scss";
+@use "mixins";
+@import url("./assets/font/fonts.css");
+
+
+
+
+
+
+:root {
+    --app-background-color: #222222;
+    --topbar-background-color: #111111;
+    --input-background-color: #111;
+    --button-hover-background-color: #333333;
+    --sidebar-header-background-color: #161616;
+    --sidebar-folder-background-color: #0004;
+    --sidebar-border-color: #fff2;
+    --sidebar-section-border-color: #222222;
+    --sidebar-search-overlay-background: #0004;
+
+    --toast-background-color: #333;
+
+    --accent: #62A3F4;
+    --accent-light: #6FAAF4;
+
+    --danger: #f45553;
+    --success: #4EDD8A;
+    --warning: #efc047;
+    
+    --text: #FFFFFF;
+    --text-on-accent: #FFFFFF;
+
+    --font-family: "Inter", sans-serif;
+}
+
+
+
+
+body {
+    text-rendering: geometricprecision;
+    font-family: var(--font-family);
+    margin: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    color: var(--text);
+}
+#trafficLightBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 67px;
+    height: 28px;
+    background-color: var(--topbar-background-color);
+    z-index: 9999;
+    -webkit-app-region: drag !important;
+    box-shadow: 0 0 10px var(--topbar-background-color);
+}
+
+[isBusy="true"]{
+    @include mixins.glowing;
+    filter: opacity(0.3);
+    pointer-events: none;
+}
+
+.grow { flex-grow: 1; }
+
+*:not(.monaco-editor *):focus {
+    outline: 0;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    &:hover {
+        color: var(--accent-light);
+    }
+}
+.imgicon {
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.shake {
+    animation: shake 0.535s cubic-bezier(.36, .07, .19, .97) both;
+    animation-iteration-count: 2;
+    transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 3px, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, -2px, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0px, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0px, 0);
+    }
+}

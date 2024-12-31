@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "target": "ES2015",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "allowJs": true,
+      "lib": ["dom", "ES2015"],
+      "outDir": "../bin",
+    },
+    "include": [
+      "./**/*.ts",
+      "./**/*.js",
+      "../assets/monaco-editor/monaco.d.ts",
+      "../../node_modules/electron/electron.d.ts",
+    ],
+    
+    "exclude": ["../node_modules", "**/*.spec.ts", "bin"],
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended"
+  }

@@ -1,0 +1,34 @@
+{
+    "name": "fluidity",
+    "version": "3.0.0",
+    "description": "Fluidity",
+    "main": "bin/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jellyfish-lsef/capacitor.git"
+    },
+    "keywords": [],
+    "author": "developer",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/jellyfish-lsef/capacitor/issues"
+    },
+    "homepage": "https://github.com/jellyfish-lsef/capacitor#readme",
+    "devDependencies": {
+        "@types/socket.io-client": "^1.4.36",
+        "@typescript-eslint/eslint-plugin": "^5.26.0",
+        "@typescript-eslint/parser": "^5.26.0",
+        "electron": "^19.0.9"
+    },
+    "dependencies": {
+        "@types/node-fetch": "^2.6.2",
+        "keytar": "^7.6.0",
+        "node-fetch": "^2.6.1",
+        "vscode-languageserver": "^7.0.0",
+        "vscode-ws-jsonrpc": "^0.2.0",
+        "walker": "^1.0.7"
+    }
+}

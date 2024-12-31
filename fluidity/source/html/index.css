@@ -1,0 +1,997 @@
+@import url("./assets/font/fonts.css");
+.glowyLink {
+  background: none;
+  padding: 0;
+  border: none;
+  color: var(--text);
+  transition: 0.25s text-shadow, 0.25s font-weight;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.glowyLink:hover {
+  text-shadow: 0 0 10px var(--text);
+  font-weight: bolder;
+}
+
+.navigationLink {
+  width: 100%;
+  padding-left: 1.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-right: 0;
+  text-align: left;
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-family);
+  font-weight: 600;
+  transition: 0.125s background, 0.125s font-weight;
+  cursor: pointer;
+  --background: transparent;
+  --background-hover: rgba(255,255,255,0.2);
+  background: var(--background);
+}
+.navigationLink:first-of-type {
+  --background: var(--accent);
+  --background-hover: var(--accent-light);
+}
+.navigationLink:hover {
+  background: var(--background-hover);
+  font-weight: 750;
+}
+.navigationLink:hover::after {
+  font-weight: 800;
+}
+.navigationLink::after {
+  content: "arrow_right_alt";
+  font-family: "Material Symbols Outlined";
+  font-weight: 300;
+  float: right;
+  margin-right: 1em;
+  display: block;
+}
+
+input[type=text], input[type=password] {
+  border: none;
+  background: var(--input-background-color);
+  color: var(--text);
+  width: calc(100% - 3em);
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  box-shadow: 0 0 5px var(--input-background-color);
+  -webkit-app-region: none !important;
+}
+
+.actionButton {
+  --button-background-color-hover: var(--button-hover-background-color);
+  background: var(--button-background-color);
+  border: none;
+  color: var(--text);
+  font-size: 18px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: 0.125s background, 0.125s font-weight;
+  vertical-align: sub;
+  height: 28px;
+  text-decoration: none;
+}
+.actionButton i {
+  vertical-align: bottom;
+}
+.actionButton.glowing {
+  background: var(--accent);
+  --button-background-color-hover: var(--accent-light);
+}
+.actionButton:hover {
+  background: var(--button-background-color-hover);
+  font-weight: bolder;
+}
+
+#runButton {
+  background: hsl(var(--pid), 87%, 40%);
+}
+#runButton:hover {
+  background: hsl(var(--pid), 87%, 42%);
+}
+
+.outlinedBtn {
+  font-family: var(--font-family);
+  border: 2px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+  border-radius: 25px;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: 0.2s background, 0.2s color;
+  cursor: pointer;
+  margin-right: 0.5em;
+  font-weight: 600;
+  align-items: center;
+  display: inline-flex;
+  --hoverColor: var(--app-background-color);
+}
+.outlinedBtn.danger {
+  --text: var(--danger);
+  font-weight: 500;
+}
+.outlinedBtn .material-symbols {
+  font-size: 21px;
+  margin-right: 3px;
+}
+.outlinedBtn:hover {
+  background: var(--text);
+  color: var(--hoverColor);
+}
+
+@keyframes glow {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.glowing {
+  animation: glow 1s ease-in-out infinite;
+}
+
+/*
+button:hover,a:hover {
+    .material-symbols {
+        font-variation-settings: "FILL" 1;
+    }
+}*/
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+.visible {
+  animation: appear 0.2s ease-in-out;
+}
+
+.invisible {
+  animation: disappear 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+#sidebar {
+  border-left: 1px solid var(--sidebar-border-color);
+}
+#sidebar input {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+#sidebar #sidebarContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebarSection {
+  background: var(--app-background-color);
+  border-top: 1px solid var(--sidebar-section-border-color);
+}
+.sidebarSection .sidebarSectionHeader {
+  display: flex;
+  flex-direction: row;
+  background: var(--sidebar-header-background-color);
+  align-items: center;
+  font-weight: 800;
+  /* align actions to right */
+}
+.sidebarSection .sidebarSectionHeader > * {
+  margin-left: 0.25em;
+}
+.sidebarSection .sidebarSectionHeader .material-symbols {
+  font-size: 24px;
+}
+.sidebarSection .sidebarSectionHeader .sidebarSectionHeaderActions {
+  text-align: right;
+  flex-grow: 1;
+}
+.sidebarSection .sidebarSectionHeader[isopen=true] {
+  font-variation-settings: "FILL" 1;
+  font-weight: 700;
+}
+.sidebarSection .sidebarSectionContent {
+  display: flex;
+  flex-direction: column;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem {
+  --button-background-color-hover: var(--button-hover-background-color);
+  background: var(--button-background-color);
+  border: none;
+  color: var(--text);
+  font-size: 18px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: 0.125s background, 0.125s font-weight;
+  vertical-align: sub;
+  height: 28px;
+  text-decoration: none;
+  font-weight: 400;
+  display: flex;
+  width: 99999999px;
+  align-items: center;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem i {
+  vertical-align: bottom;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem.glowing {
+  background: var(--accent);
+  --button-background-color-hover: var(--accent-light);
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem:hover {
+  background: var(--button-background-color-hover);
+  font-weight: bolder;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem .material-symbols {
+  font-size: 20px;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem > :first-child {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  border-radius: 25%;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem[type=directory] {
+  font-weight: 600;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem[type=directory]:hover {
+  font-weight: 800 !important;
+}
+.sidebarSection .sidebarSectionContent .sidebarSectionContentItem[isopen=true] {
+  --button-background-color: var(--sidebar-folder-background-color);
+  font-variation-settings: "FILL" 1;
+  font-weight: 700;
+}
+.sidebarSection .sidebarSectionContent hr {
+  border-color: var(--sidebar-border-color);
+  margin-block-start: 0.25em;
+  margin-block-end: 0.25em;
+}
+
+@keyframes maxHeight {
+  0% {
+    max-height: 0px;
+    opacity: 0;
+  }
+  100% {
+    max-height: 28px;
+    opacity: 1;
+  }
+}
+.vfs-folder .vfs-folder {
+  padding-left: 0.4em;
+  background-color: var(--sidebar-folder-background-color);
+}
+
+.vfs-folder * {
+  animation: maxHeight 0.2s ease-in-out;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.sidebarFolderLoading {
+  text-align: center;
+}
+.sidebarFolderLoading .material-symbols {
+  animation: spin 0.75s ease-in-out infinite;
+}
+
+#searchResults {
+  position: fixed;
+  top: 28px;
+  height: calc(100vh - 28px);
+  background-color: var(--sidebar-search-overlay-background);
+  backdrop-filter: blur(4px) brightness(0.8);
+  min-width: 100%;
+}
+#searchResults :last-child {
+  box-shadow: 0 5px 5px var(--app-background-color);
+}
+
+#sidebarSearch {
+  padding-right: 28px;
+}
+
+#clearSearch {
+  background: none;
+  padding: 0;
+  border: none;
+  color: var(--text);
+  transition: 0.25s text-shadow, 0.25s font-weight;
+  vertical-align: middle;
+  cursor: pointer;
+  position: fixed;
+  width: 28px !important;
+  height: 28px;
+  right: 0;
+}
+#clearSearch:hover {
+  text-shadow: 0 0 10px var(--text);
+  font-weight: bolder;
+}
+
+.contentPage {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.contentPage .contentPageHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.contentPage .contentPageHeader .contentPageHeaderImage {
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 1em;
+  flex-shrink: 0;
+  background-color: rgba(136, 136, 136, 0.5333333333);
+}
+.contentPage .contentPageHeader .contentPageHeaderInfo h1, .contentPage .contentPageHeader .contentPageHeaderInfo h2 {
+  margin: 0;
+}
+.contentPage .contentPageHeader .contentPageHeaderInfo h1 {
+  font-weight: 900;
+}
+.contentPage .description {
+  width: 100%;
+  border: 0;
+  flex-grow: 1;
+  align-self: stretch;
+}
+
+.content-user .contentPageHeaderImage {
+  border-radius: 100%;
+}
+
+.contentPage:not(.content-user) .contentPageHeaderImage {
+  border-radius: 25%;
+}
+
+.inlineUserImage {
+  height: 1em;
+  vertical-align: middle;
+  border-radius: 100%;
+}
+
+.rating .ratingBarHeader {
+  display: flex;
+  flex-direction: row;
+}
+.rating .ratingBarHeader .ratingBarButton {
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 24px;
+  color: var(--text);
+  transition: 0.25s color, 0.25s font-weight, 0.25s font-variation-settings;
+}
+.rating .ratingBarHeader .ratingBarButton .material-symbols {
+  vertical-align: middle;
+}
+.rating .ratingBarHeader[rating=like] #likeButton {
+  color: var(--success);
+  font-weight: 800;
+  font-variation-settings: "FILL" 1;
+}
+.rating .ratingBarHeader[rating=dislike] #dislikeButton {
+  color: var(--danger);
+  font-weight: 800;
+  font-variation-settings: "FILL" 1;
+}
+.rating progress {
+  width: 100%;
+  border-radius: 100%;
+  -webkit-appearance: none;
+}
+.rating progress::-webkit-progress-bar {
+  background-color: var(--danger);
+  border-radius: 16px;
+}
+.rating progress::-webkit-progress-value {
+  background-color: var(--success);
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  transition: 0.25s width;
+}
+.rating progress::-webkit-progress-value[style="width: 100%;"] {
+  border-radius: 16px;
+}
+
+.authorLink > .imgicon {
+  height: 1em;
+  width: 1em;
+  border-radius: 100%;
+}
+
+#aboutPage {
+  top: 0px;
+  margin-top: 0px;
+  max-height: calc(100vh - 28px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  /*justify-content: center;*/
+  display: flex;
+  flex-direction: column;
+}
+#aboutPage .material-symbols {
+  vertical-align: middle;
+}
+#aboutPage #aboutPageHeader {
+  display: flex;
+  align-items: center;
+}
+#aboutPage #aboutPageHeader div {
+  margin: 8px;
+}
+#aboutPage #aboutPageHeader div #aboutCopyright {
+  font-weight: 300;
+  opacity: 0.5;
+  font-size: 100%;
+}
+#aboutPage #aboutPageHeader div * {
+  margin: 0;
+}
+#aboutPage #aboutPageLinks {
+  text-align: center;
+}
+#aboutPage #aboutPageLinks a {
+  padding: 0.25em;
+  text-decoration: none;
+}
+#aboutPage #aboutPageOptions .aboutPageOption {
+  margin-bottom: 0.5em;
+}
+#aboutPage #aboutPageOptions .aboutPageOption .aboutPageOptionBar {
+  display: flex;
+}
+#aboutPage #aboutPageOptions .aboutPageOption .aboutPageOptionBar .aboutPageOptionTitle {
+  flex: 1;
+  font-size: 125%;
+  font-weight: 600;
+}
+#aboutPage #aboutPageOptions .aboutPageOption .aboutPageOptionBar div {
+  display: inline-block;
+}
+#aboutPage #aboutPageOptions .aboutPageOption .aboutPageOptionBar input[type=checkbox] {
+  transform: scale(1.25);
+}
+#aboutPage #aboutPageOptions .aboutPageOption b {
+  opacity: 0.5;
+}
+
+body[loggedIn][autohidesidebar=true] #contentContainer, body[loggedIn][autohidesidebar=true] #tabbar, body[loggedIn][autohidesidebar=true] #editorContainer, body[loggedIn][autohidesidebar=true] #monacoEditor {
+  max-width: 100vw !important;
+}
+body[loggedIn][autohidesidebar=true] #sidebar {
+  position: fixed;
+  right: 0;
+  transform: translate(100%);
+  min-height: 100vh;
+  background-color: var(--app-background-color);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2666666667);
+  transition: 0.5s transform;
+}
+body[loggedIn][autohidesidebar=true] #sidebar:hover {
+  transform: translate(0%);
+}
+body[loggedIn][autohidesidebar=true] #sidebar::before {
+  content: "chevron_left";
+  position: fixed;
+  left: 0;
+  top: 50vh;
+  transform: translate(-100%, -50%);
+  background: var(--topbar-background-color);
+  font-family: "Material Symbols Outlined";
+  border-top-left-radius: 100%;
+  border-bottom-left-radius: 100%;
+  font-size: 300%;
+  z-index: 9999;
+}
+
+body[loggedIn] #appContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--app-background-color);
+}
+body[loggedIn] #appContainer > div {
+  display: flex;
+  flex-direction: column;
+}
+body[loggedIn] #appContainer > div > :first-child {
+  height: 28px;
+  width: 100%;
+  background-color: var(--topbar-background-color);
+  -webkit-app-region: drag;
+}
+body[loggedIn] #appContainer > div > :nth-child(2) {
+  flex-grow: 1;
+  width: 100%;
+}
+body[loggedIn] #appContainer #contentContainer {
+  flex-grow: 1;
+  max-width: calc(100vw - 250px);
+}
+body[loggedIn] #appContainer #contentContainer #editorContainer {
+  display: flex;
+  max-width: calc(100vw - 250px);
+}
+body[loggedIn] #appContainer #contentContainer #editorContainer > * {
+  display: none;
+  flex-grow: 1;
+}
+body[loggedIn] #appContainer #contentContainer #editorContainer[containing=editor] > #monacoEditorContainer {
+  display: flex;
+  max-width: 100%;
+}
+body[loggedIn] #appContainer #contentContainer #editorContainer[containing=console] > #console {
+  display: block;
+}
+body[loggedIn] #appContainer #contentContainer #editorContainer[containing=content] > #contentPageContainer {
+  display: flex;
+}
+body[loggedIn] #appContainer #sidebar {
+  width: 250px;
+}
+body[loggedIn] #console {
+  background: #000;
+  overflow: hidden;
+}
+body[loggedIn] #monacoEditorContainer {
+  flex-direction: column;
+}
+body[loggedIn] #monacoEditor {
+  flex-grow: 1;
+  max-width: calc(100vw - 250px);
+  max-height: calc(100vh - 56px);
+}
+body[loggedIn] .actionsPanel {
+  width: 100%;
+  height: 28px;
+  background-color: var(--topbar-background-color);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+body[loggedIn] .actionsPanel .lspStatus {
+  vertical-align: middle;
+  opacity: 0.5;
+}
+body[loggedIn] .actionsPanel .lspStatus span {
+  transition: 0.5s opacity;
+  opacity: 0;
+}
+body[loggedIn] .actionsPanel .lspStatus:hover span {
+  opacity: 1;
+}
+body[loggedIn] #tabbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  max-width: calc(100vw - 250px);
+}
+body[loggedIn] #tabbar #tabbar-tabs {
+  padding-left: 67px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  align-items: stretch;
+}
+body[loggedIn] #tabbar #tabbar-tabs .tabbar-tab {
+  background: var(--topbar-background-color);
+  color: var(--text);
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: 0.25s background, 0.25s opacity, 0.25s font-weight;
+}
+body[loggedIn] #tabbar #tabbar-tabs .tabbar-tab .imgicon {
+  height: 28px;
+  width: 28px;
+  margin-right: 0.25em;
+}
+body[loggedIn] #tabbar #tabbar-tabs .tabbar-tab:hover {
+  background: var(--button-hover-background-color);
+  opacity: 0.9;
+}
+body[loggedIn] #tabbar #tabbar-tabs .tabbar-tab.active {
+  font-weight: bolder;
+  background: var(--app-background-color);
+  opacity: 1;
+}
+body[loggedIn] #tabbar #tabbar-tabs .tabbar-tab > * {
+  vertical-align: middle;
+}
+body[loggedIn] #tabbar button {
+  background: none;
+  padding: 0;
+  border: none;
+  color: var(--text);
+  transition: 0.25s text-shadow, 0.25s font-weight;
+  vertical-align: middle;
+  cursor: pointer;
+}
+body[loggedIn] #tabbar button:hover {
+  text-shadow: 0 0 10px var(--text);
+  font-weight: bolder;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+body:not([loggedIn]) #trafficLightBackdrop {
+  display: none;
+}
+body:not([loggedIn]) #loginBackground {
+  opacity: 0.5;
+  transform-origin: top;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./assets/img/sqooshed.jpg");
+  background-position: center left;
+  background-size: cover;
+  z-index: -1;
+  animation: fadeIn 0.25s ease-in-out;
+  -webkit-app-region: drag !important;
+}
+body:not([loggedIn]) #loginBar {
+  min-height: 100%;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-background-color);
+  text-align: center;
+  justify-items: center;
+  box-shadow: 0 0 20px var(--topbar-background-color);
+  animation: slideRight 0.5s ease-in-out;
+}
+body:not([loggedIn]) #loginBar #loginBarHeader {
+  padding-top: 30px;
+  width: 100%;
+}
+body:not([loggedIn]) #loginBar #loginBarHeader h1 {
+  font-size: 30px;
+  font-weight: 900;
+}
+body:not([loggedIn]) #loginBar #loginBarBody {
+  transition: 0.25s opacity;
+}
+body:not([loggedIn]) #loginBar .loginAccount {
+  width: 100%;
+  padding-left: 1.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-right: 0;
+  text-align: left;
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-family);
+  font-weight: 600;
+  transition: 0.125s background, 0.125s font-weight;
+  cursor: pointer;
+  --background: transparent;
+  --background-hover: rgba(255,255,255,0.2);
+  background: var(--background);
+}
+body:not([loggedIn]) #loginBar .loginAccount:first-of-type {
+  --background: var(--accent);
+  --background-hover: var(--accent-light);
+}
+body:not([loggedIn]) #loginBar .loginAccount:hover {
+  background: var(--background-hover);
+  font-weight: 750;
+}
+body:not([loggedIn]) #loginBar .loginAccount:hover::after {
+  font-weight: 800;
+}
+body:not([loggedIn]) #loginBar .loginAccount::after {
+  content: "arrow_right_alt";
+  font-family: "Material Symbols Outlined";
+  font-weight: 300;
+  float: right;
+  margin-right: 1em;
+  display: none;
+}
+body:not([loggedIn]) #loginBar .loginAccount img {
+  border-radius: 100%;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left: -4px;
+  margin-right: 8px;
+}
+body:not([loggedIn]) #loginBar .loginAccount span {
+  vertical-align: middle;
+  display: inline-block;
+}
+body:not([loggedIn]) #loginBar .loginAccount span p {
+  opacity: 0.5;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  transition: 0.25s font-weight;
+}
+body:not([loggedIn]) #loginBar .loginAccount span b {
+  transition: 0.25s font-weight;
+  font-size: 24px;
+  font-weight: 700;
+}
+body:not([loggedIn]) #loginBar .loginAccount:hover p {
+  font-weight: 500;
+}
+body:not([loggedIn]) #loginBar .loginAccount:hover b {
+  font-weight: 800;
+}
+body:not([loggedIn]) #loginBarFooter img {
+  filter: grayscale(100%) brightness(100%) contrast(0);
+}
+body:not([loggedIn]) #loginBarFooter p {
+  margin-top: 0;
+  color: #7F7F7F;
+}
+body:not([loggedIn]) .loginStatus {
+  position: fixed;
+  top: 0;
+  left: 420px;
+  width: calc(100vw - 420px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: fadeIn 0.25s ease-in-out;
+}
+body:not([loggedIn]) .loginStatus .loginStatusLight {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background: #DD4E69;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+body:not([loggedIn]) .loginStatus .loginStatusLight[status=online] {
+  background: var(--success);
+}
+body:not([loggedIn]) .loginStatus .loginStatusLight[status=limited] {
+  background: var(--warning);
+}
+body:not([loggedIn]) .loginStatus .loginStatusLight i {
+  font-size: 100px !important;
+  padding-top: 2px;
+}
+body:not([loggedIn]) .loginStatus .loginStatusText {
+  text-align: center;
+  font-size: 150%;
+  max-width: 800px;
+}
+body:not([loggedIn]) .loginStatus .loginStatusText .loginStatusName {
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-weight: 600;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5333333333);
+}
+body:not([loggedIn]) .loginStatus .loginStatusText .loginStatusStatus {
+  font-size: 150%;
+  font-weight: 800;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5333333333);
+}
+
+#toastContainer {
+  position: fixed;
+  top: 0;
+  left: 50vw;
+  transform: translateX(-50%);
+  z-index: 999999;
+  max-height: none;
+  pointer-events: none;
+}
+#toastContainer .toast {
+  background: var(--toast-background-color);
+  padding: 0.25em;
+  margin-top: 0.5em;
+  border-radius: 0.25em;
+  box-shadow: 0 0 5px var(--toast-background-color);
+  text-align: center;
+  transition: 0.5s opacity, 0.5s transform, 0.5s max-height;
+  opacity: 0;
+  transform: translateY(-100%) scale(0);
+}
+#toastContainer .toast[visible=true] {
+  opacity: 1;
+  transform: translateY(0%) scale(1);
+}
+#toastContainer .toast .material-symbols {
+  float: left;
+  vertical-align: middle;
+  font-size: 20px;
+  margin-right: 0.2em;
+}
+#toastContainer .toast.danger {
+  --toast-background-color: var(--danger);
+}
+#toastContainer .toast.success {
+  --toast-background-color: var(--success);
+}
+#toastContainer .toast.warning {
+  --toast-background-color: var(--warning);
+}
+#toastContainer .toast.accent {
+  --toast-background-color: var(--accent);
+}
+
+:root {
+  --app-background-color: #222222;
+  --topbar-background-color: #111111;
+  --input-background-color: #111;
+  --button-hover-background-color: #333333;
+  --sidebar-header-background-color: #161616;
+  --sidebar-folder-background-color: #0004;
+  --sidebar-border-color: #fff2;
+  --sidebar-section-border-color: #222222;
+  --sidebar-search-overlay-background: #0004;
+  --toast-background-color: #333;
+  --accent: #62A3F4;
+  --accent-light: #6FAAF4;
+  --danger: #f45553;
+  --success: #4EDD8A;
+  --warning: #efc047;
+  --text: #FFFFFF;
+  --text-on-accent: #FFFFFF;
+  --font-family: "Inter", sans-serif;
+}
+
+body {
+  text-rendering: geometricprecision;
+  font-family: var(--font-family);
+  margin: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  color: var(--text);
+}
+
+#trafficLightBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 67px;
+  height: 28px;
+  background-color: var(--topbar-background-color);
+  z-index: 9999;
+  -webkit-app-region: drag !important;
+  box-shadow: 0 0 10px var(--topbar-background-color);
+}
+
+[isBusy=true] {
+  animation: glow 1s ease-in-out infinite;
+  filter: opacity(0.3);
+  pointer-events: none;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+*:not(.monaco-editor *):focus {
+  outline: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-light);
+}
+
+.imgicon {
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: cover;
+  background-position: center;
+}
+
+.shake {
+  animation: shake 0.535s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation-iteration-count: 2;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 3px, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, -2px, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0px, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0px, 0);
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

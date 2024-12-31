@@ -1,0 +1,42 @@
+@import "./_mixins.scss";
+
+#navbar {
+    @include glow();
+    height: 55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: row;
+    box-shadow: 0px 6px 18px 0px #0005;
+}
+#navbar-brand {
+    font-size: 25px;
+    font-weight: bolder;
+    padding-left: 7px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+#navbar-tabs {
+    flex-grow: 1;
+    text-align: center;
+}
+.navbar-tab {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+    opacity: 0.8;
+    transition: 0.2s font-weight, 0.2s opacity;
+}
+.navbar-tab:hover, .navbar-tab.active {
+    opacity: 1;
+}
+.navbar-tab.active {
+    font-weight: bold;
+    text-shadow: #fff7 0px 0px 5px;
+}
+
+#navbar-inject {
+    margin-right: 12px;
+}

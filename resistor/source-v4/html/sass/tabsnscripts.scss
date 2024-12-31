@@ -1,0 +1,77 @@
+
+.script,
+.tab {
+    text-decoration: none;
+    vertical-align: middle;
+    font-family: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.1s background, 0.1s padding, 0.1s box-shadow;
+    
+}
+.script *,.tab * { cursor: pointer; }
+
+.script {
+    width: 100%;
+    padding-left: 12px;
+    overflow: hidden;
+}
+.script {
+    max-height: 1.3em;
+}
+.script-type-object:focus, .script-type-object:focus-within {
+    max-height: 9999999px;
+
+}
+
+.script-type-string:hover,
+.tab.active {
+    background: #CA1115;
+    color: #fff;
+    opacity: 100%;
+}
+
+.script-type-string:hover {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    box-shadow: 0px 0px 8px #CA1115;
+}
+
+.tab:not(.active):hover {
+    color: #fff;
+    background: #fff2;
+}
+.tab.active {
+    color: #fff;
+    text-shadow: 0px 0px 8px #fff;
+}
+
+.script .material-icons,
+.tab .material-icons {
+    align-self: center;
+    vertical-align: bottom;
+    font-size: 20px;
+}
+.script .material-icons {
+    margin-right: -2px;
+}
+
+#tabsContainer {
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x:scroll;
+    overflow-y:hidden;
+    transition: 0.2s filter, 0.2s margin-left;
+}
+
+
+.tab {
+    height: 24px;
+    padding: 3px;
+    padding-bottom: 0px;
+}
+
+
+

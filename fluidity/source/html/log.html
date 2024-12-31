@@ -1,0 +1,65 @@
+<!--
+    (c) 2021 developer & Fluidity Team 
+
+    i am deeply sorry if you're here reading this code
+-->
+<html>
+    <head>
+        
+        <title>Fluidity Log</title>
+        <!-- without specifying charset monaco goes Â-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <style>
+            code {
+                white-space: nowrap;
+            }
+            .c0 {
+                color: #000;
+            }        
+            .c1 {
+                color: #fa6e7c;
+            }
+            .c2 {
+                color: #adee7a;
+            }
+            .c3 {
+                color: #eee280;
+            }
+            .c4 {
+                color: #00ACFC;
+            }
+            .c5 {
+                color: #ec7bee;
+            }
+            .c6 {
+                color: #61cbee;
+            }
+            .c9,body,code {
+                color: #BFCAE0;
+            }
+        </style>
+    </head>
+    <body>
+       <code> 
+
+       </code>
+       <script src="../consts.js"></script>
+       <script>
+            var ipc = require('electron').ipcRenderer;
+            var fs = require('fs');
+            var path = require('path');
+            var log = document.body
+
+            var logfile = path.join(JELLYFISH_DATA_DIR,"log.diag");
+            function parseLog(text) {
+                return "<code>" + text.replace(/\n/g, "<br>").replace(/\x1B\[3(.)m/g,"<span class='c$1'>") + "</code>";
+            }
+
+            log.innerHTML = parseLog(fs.readFileSync(logfile).toString()) + "<br>";
+            ipc.on('logwrite', function(event, arg) {
+                log.innerHTML += "<code>" + parseLog(arg) + "</code>";
+                document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+            });
+       </script>
+    </body>
+</html>

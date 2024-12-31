@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "ES2015",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "allowJs": true,
+      "lib": ["dom", "ES2015"],
+      "outDir": "./assets/bin",
+    },
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.js"
+    ],
+    
+    "exclude": ["node_modules", "**/*.spec.ts", "bin"],
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended"
+  }

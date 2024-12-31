@@ -1,0 +1,5 @@
+node_modules
+builds
+.DS_Store
+bin
+html/bin

@@ -1,0 +1,163 @@
+@use "mixins";
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }       
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+body:not([loggedIn]) {
+
+    #trafficLightBackdrop {
+        display: none;
+    }
+    
+
+    #loginBackground {
+        opacity: 0.5;
+        transform-origin: top;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("./assets/img/sqooshed.jpg");
+        background-position: center left;
+        background-size: cover;
+        z-index: -1;
+        animation: fadeIn .25s ease-in-out;
+        -webkit-app-region: drag !important;
+    }
+    #loginBar {
+        min-height: 100%;
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        background: var(--app-background-color);
+        text-align: center;
+        justify-items: center;
+        box-shadow: 0 0 20px var(--topbar-background-color);
+        animation: slideRight .5s ease-in-out;
+
+        
+        #loginBarHeader {
+            padding-top: 30px;
+            width: 100%;
+            h1 {
+                font-size: 30px;
+                font-weight: 900;
+            }
+        }
+        #loginBarBody {
+            transition: 0.25s opacity;
+        }
+
+        .loginAccount {
+            @include mixins.navigationLink(none);
+            img {
+                border-radius: 100%;
+                vertical-align: middle;
+                background-color: rgba(255,255,255,0.2);
+                margin-left: -4px;
+                margin-right: 8px;
+            }
+            span {
+                vertical-align: middle;
+                display: inline-block;
+                p {
+                    opacity: 0.5;
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin: 0;
+                    transition: 0.25s font-weight;
+                }
+                b { 
+                    transition: 0.25s font-weight;
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+            }
+            &:hover {
+                p {
+                    font-weight: 500;
+                }
+                b {
+                    font-weight: 800;
+                }
+            }
+        }
+
+    }
+    #loginBarFooter {
+        img {
+            filter: grayscale(100%) brightness(100%) contrast(0);
+        }
+        p {
+            margin-top: 0;
+            color: #7F7F7F;
+        }
+    }
+    
+    .loginStatus {
+        position: fixed;
+        top: 0;
+        left: 420px;
+        width: calc(100vw - 420px);
+        
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        animation: fadeIn .25s ease-in-out;
+
+        .loginStatusLight {
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;       
+            background: #DD4E69;
+            &[status="online"] {
+                background: var(--success);
+            }
+            &[status="limited"] {
+                background: var(--warning);
+            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                font-size: 100px !important;
+                padding-top: 2px;
+            }
+            margin-bottom: 0.8em;
+        }
+        .loginStatusText {
+            text-align: center;
+            font-size: 150%;
+            max-width: 800px;
+            .loginStatusName {
+                text-transform: uppercase;
+                opacity: 0.5;
+                font-weight: 600;
+                text-shadow: 0 0 2px #0008;
+            }
+            .loginStatusStatus {
+                font-size: 150%;
+                font-weight: 800;
+                text-shadow: 0 0 4px #0008;
+            }
+        }
+    }
+}

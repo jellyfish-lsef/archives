@@ -1,0 +1,37 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build Dev
+
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+  
+      - run: npm i -g electron-packager electron-installer-dmg sass typescript
+      - run: npm i --target_arch=x64 --target_platform=darwin
+      
+      - run: rm -rf bin/
+      - run: tsc
+      - run: bash -c "cd html; rm -rf bin index.cs*; cd ts; tsc; cd ..; sass sass/index.scss index.css"
+
+      - run: node -e "const pkg = require('./package.json');pkg.version+='-ci' + '$GITHUB_SHA'.substring(0,7);fs.writeFileSync('package.json',JSON.stringify(pkg));process.stdout.write('::set-output name=APPVERSION::' + pkg.version);"
+        id: setVersion
+
+      - run: rm -rf builds
+      - run: mkdir builds
+      - run: electron-packager . Fluidity --exclude=.git --app-version "${{steps.setVersion.outputs.APPVERSION}}" --platform darwin --out ./builds --overwrite --icon ./logo.icns --asar --app-copyright "(c) $(date +'%Y') " --app-bundle-id com.fluidity.m.capacitor --darwin-dark-mode-support
+
+      - run: electron-installer-dmg ./builds/Fluidity-darwin-x64/Fluidity.app SWM-${{steps.setVersion.outputs.APPVERSION}}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: SWM-${{steps.setVersion.outputs.APPVERSION}}.dmg
+          path: ./SWM-${{steps.setVersion.outputs.APPVERSION}}.dmg
+          retention-days: 14
+

@@ -1,0 +1,78 @@
+#page-editor {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-items: stretch;
+}
+#editor-container {
+    flex-grow: 1;
+    justify-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.resistor-text-editor {
+    flex-grow: 1;
+}
+.resistor-text-editor:after {
+    content: " ";
+    background-image: url("./img/icon-win.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position:absolute;
+    width:50%;
+    height:50%;
+    left: 25%;
+    top: 25%;
+    transition: 0.2s opacity;
+    z-index: -1;
+    filter: brightness(0.8) grayscale(100%);
+}
+
+/**
+ * hacky way to get the editor to resize when the window resizes
+ * tried using flexbox but it didn't work
+ */
+div.monaco-editor {
+    position: absolute;
+}
+
+@keyframes fade-in-fast {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.resistor-text-editor:not(.populated):after  {
+    /*animation-name: fade-in;*/
+    animation-duration: 0.2s;
+}
+.resistor-text-editor > div{
+    /*animation-name: fade-in-fast;*/
+    animation-duration: 0.2s;
+}
+
+#scripts-sidebar {
+    width:300px;
+    background: #222;
+    transition: 0.2s margin-right;
+}
+#scripts-sidebar.closed {
+    margin-right: -300px;
+}
+#script-sidebar-toggle {
+    position: fixed;
+    margin-left: -1em;
+    transition: 0.2s transform;
+}
+#scripts-sidebar.closed > #script-sidebar-toggle {
+    transform: scaleX(-1);
+}
+#scripts-sidebar-contents {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+}
+
+
+

@@ -1,0 +1,90 @@
+/* (c) 2022 developer */
+@use "./navbar.scss";
+@use "./editor.scss";
+@use "./tools.scss";
+@use "./components.scss";
+@use "./tabsnscripts.scss";
+@import url("./font/Gotham-SSm/stylesheet.css");
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    20% { opacity: 0;}
+    to { opacity: 1; }
+}
+
+
+body,
+body *:not(.monaco-editor *),
+body>*:not(.monaco-editor>*) {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    animation: fade-in 0.5s;
+}
+
+*:not(.monaco-editor *):focus {
+    outline: 0;
+}
+
+body {
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    font-family: "Gotham SSm", "Menlo", monospace;
+    border: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+button,
+input {
+    font-family: "Gotham SSm", "Menlo", monospace;
+}
+
+
+#titlebar {
+    -webkit-app-region: drag !important;
+    height: 30px;
+    background: linear-gradient(to left,#E51E10,#A20F05);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: row;
+}
+#app-content {
+    height: 100%;
+    width: 100%;
+    transition: 0.3s margin-left;
+    flex-grow: 1;
+}
+#app-content[page="editor"] {
+    margin-left: 0;
+}
+#app-content[page="tools"]  {
+    margin-left: -100vw;
+}
+#app-content[page="scripthub"]  {
+    margin-left: -200vw;
+}
+.page {
+    width: 100vw;
+    height: calc(100vh - 30px - 55px); /* JAAAAANNNKKKK!!!!*/
+    position: absolute;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+#page-tools {
+    margin-left: 100vw;
+}
+#page-scripthub {
+    margin-left: 200vw;
+}
+.material-icons {
+    text-decoration: none;
+    vertical-align: sub;
+}

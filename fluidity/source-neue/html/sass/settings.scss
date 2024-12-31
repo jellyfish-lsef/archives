@@ -1,0 +1,62 @@
+
+#aboutPage {
+    top: 0px;
+    margin-top: 0px;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    /*justify-content: center;*/
+    display: flex;
+    flex-direction: column;
+    .material-symbols {
+        vertical-align: middle;
+    }
+    #aboutPageHeader {
+        display:flex;
+        align-items: center;
+        div {
+            margin: 8px;
+            #aboutCopyright {
+                font-weight: 300;
+                opacity: 0.5;
+                font-size: 100%;
+            }
+            * {
+                margin: 0;
+            }
+        }
+    }
+    #aboutPageLinks {
+        text-align: center;
+        a {
+            padding: 0.25em;
+            text-decoration: none;
+        }
+    }
+    #aboutPageOptions {
+        .aboutPageOption {
+            margin-bottom: 0.5em;
+            .aboutPageOptionBar {
+                display: flex;
+                .aboutPageOptionTitle {
+                    flex: 1;
+                    font-size: 125%;
+                    font-weight: 600;
+                }
+                div {
+                    display: inline-block
+                }
+                input[type=checkbox] {
+                    transform: scale(1.25);
+                }
+            }
+            b {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+

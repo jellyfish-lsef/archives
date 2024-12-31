@@ -1,0 +1,98 @@
+/* (c) 2022 developer */
+@import "./_mixins.scss";
+
+.transparent-button {
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right:20px;
+    transition: 0.2s background, 0.2s color;
+    cursor: pointer;
+}
+
+.transparent-button:not([disabled]):hover {
+    background: #fff;
+    color: rgb(158, 10, 20);
+}
+.transparent-button[disabled] {
+    opacity: 0.8;
+}
+
+
+
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes speen {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.fab {
+    @include glow(18px);
+    border-radius: 100%;
+    padding: 0.2em;
+    color: #fff;
+    aspect-ratio: 1/1;
+    font-size: 350%;
+    opacity: 0.8;
+    transition: 0.5s box-shadow,0.2s opacity;
+}
+.fab:hover {
+    @include glow(32px);
+    opacity: 1;
+}
+.spin {
+    animation: spin 0.5s;
+}
+.speen {
+    animation: speen 0.5s;
+}
+#run-script {
+    position: fixed;
+    bottom: 0.36em;
+    margin-left: -2em;
+}
+
+
+
+
+
+
+.glowyLink {
+    color: #fff;
+    transition: 0.2s color, 0.2s text-shadow;
+    text-shadow: 0px 0px 0px #CA1115;
+}
+
+.glowyLink.active,
+.glowyLink:hover {
+    color: #CA1115;
+    text-shadow: 0px 0px 8px #CA1115;
+}
+.active > * > .glowyLink {
+    text-shadow: 0px 0px 0px #fff;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.2s opacity, 0.2s text-shadow;
+}
+.active > * > .glowyLink:hover {
+    color: #fff;
+    text-shadow: 0px 0px 5px #fff;
+    opacity: 1;
+}

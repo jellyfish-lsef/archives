@@ -1,0 +1,203 @@
+@use "./sidebar.scss";
+@use "./content.scss";
+@use "./settings.scss";
+@use "./autohidesidebar.scss";
+
+
+@use "mixins";
+
+body[loggedIn] {
+    #appContainer {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: [content] calc(100% - 250px) [sidebar] 250px;
+        grid-template-rows: [topbar] 36px [content] auto;
+        
+
+        > div {
+            display: contents;
+        }
+
+        #tabbar, #sidebarSearchBox, #dragbar {
+            grid-row: topbar;
+            z-index: 10;
+        }
+        #editorContainer, #searchResults,#sidebarContent  {
+            grid-row: topbar / 3;
+            z-index: 1;
+        }
+        #searchResults {
+            z-index: 5;
+        }
+
+        #tabbar, #editorContainer, #dragbar {
+            grid-column: content;
+        }
+        #sidebarSearchBox, #searchResults,#sidebarContent {
+            grid-column: sidebar;
+        }
+        #dragbar {
+            -webkit-app-region: drag;
+        }
+        #editorContainer {
+            background-color: var(--app-backgroundColor);
+            box-shadow: 0 0 10px var(--app-backgroundColor);
+            display: flex;
+            > * { display: none; flex-grow: 1;}
+            &[data-containing="console"] > #console { display: block; }
+            &[data-containing="editor"] > #monacoEditorContainer { display: flex; max-width: 100%; }
+            &[data-containing="content"] > #contentPageContainer { display: flex; }
+            &[data-containing="nothing"] > #contentPageEmptyHint { display: flex; }
+        }
+
+    }
+    #contentPageEmptyHint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0.25;
+        img {
+            height: 128px;
+            filter: grayscale(100%);
+        }
+    }
+    
+
+    #contentPageContainer > .content, #contentPageContainer > .contentPage {
+        padding-top: 40px;
+    }
+    #console {
+        background: #000;
+        overflow: hidden;
+        padding-top: 40px;
+    }
+
+
+    #monacoEditorContainer {
+        flex-direction: column;
+    }
+    #monacoEditor {
+        flex-grow: 1;
+        max-width: calc(100vw - 250px);
+        max-height: 100vh;
+        .monaco-editor {
+            .overlayWidgets {
+                transform: translateY(40px);
+                > * {
+                    transition: 0.25s opacity, 0.25s transform;
+                    &[aria-hidden="true"] {
+                        opacity: 0;
+                        pointer-events: none;
+                    }
+                }
+            }
+            .decorationsOverviewRuler {
+                display: none;
+            }
+
+        }
+    }
+    .actionsPanel {
+        height: 64px;
+        margin-top: -72px;
+        padding-inline: 8px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        z-index: 2;
+        overflow-x: scroll;
+        display: flex;
+        justify-content: flex-end;
+        
+
+        .lspStatus {
+            vertical-align: middle;
+
+            opacity: 0.5;
+            span {
+                transition: 0.5s opacity;
+                opacity: 0;
+            }
+            &:hover span {
+                opacity: 1;
+            }
+
+        }
+    }
+
+
+
+    #tabbar {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        max-width: calc(100vw - 250px);
+        #tabbar-tabs {
+            padding: 4px;
+            position: relative;
+            padding-left: 82px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            overflow-y: visible;
+            align-items: stretch;
+            gap: 0.25em;
+            height:32px;
+
+            .tabbar-tab {
+                box-shadow: 0 0 4px var(--tab-backgroundColor);
+                text-shadow: 0 0 10px black;
+                background: var(--tab-backgroundColor);
+                color: var(--tab-text);
+                display: flex;
+                align-items: center;
+                padding-inline: 0.5em;
+                flex-shrink: 0;
+                
+                transition: 0.25s background, 0.25s opacity, 0.25s font-weight, 0.25s box-shadow;
+                box-shadow: 0 0 4px var(--tab-backgroundColor);
+                
+                .imgicon {
+                    height: 28px;
+                    width: 28px;
+                    margin-right: 0.5em;
+                    border-radius: 4px;
+                }
+                opacity: 0.8;
+                &:hover {
+                    background: var(--tab-hover-backgroundColor);
+                    opacity: 0.9;
+                    * {
+                        opacity: 1;
+                    }
+                }
+                &.active {
+                    font-weight: bolder;
+                    background: var(--tab-active-backgroundColor);
+                    border-bottom: 1px solid var(--tab-active-glow);
+                    
+                    opacity: 1;
+                    * {
+                        opacity: 1;
+                    }
+                }
+                > * {
+                    vertical-align: middle;
+                    opacity: 0.5;
+                    transition: 0.25s opacity;
+                }
+            }
+        }
+        button {
+            @include mixins.glowyLink;
+            
+        }
+        > button {
+            text-shadow: 0 0 2px var(--glowyLink-text);
+            transform: translateY(2px);
+        }
+    }
+}

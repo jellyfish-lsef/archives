@@ -1,0 +1,244 @@
+@mixin glowyLink {
+    vertical-align: middle;
+    
+    padding: 0;
+    
+    border: none;
+
+    background: none;
+
+    color: var(--glowyLink-text);
+    
+
+    cursor: pointer;
+
+    transition: 0.25s text-shadow, 0.25s font-weight;
+
+
+    &:hover {
+        font-weight: bolder;
+        text-shadow: 0 0 10px var(--glowyLink-hover-text);
+    }
+}
+.glowyLink { @include glowyLink; }
+
+input[type=text],input[type=password] {
+    width: calc(100% - 3em);
+    
+    margin-bottom: 10px;
+    padding: 5px;
+
+    border: none;
+    border-radius: 5px;
+    
+    background: var(--input-backgroundColor);
+    box-shadow: 0 0 5px var(--input-backgroundColor);
+    
+    color: var(--input-text);
+    font-size: 18px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    
+    -webkit-app-region: none !important;
+}
+
+@mixin fileEntry {
+
+    display: flex;
+    align-items: center;
+    vertical-align: sub;
+    
+    padding: 0.125em;
+
+    border: none;
+
+    background: var(--fileEntry-backgroundColor);
+    
+    color: var(--fileEntry-text);
+    font-size: 18px;
+    font-family: var(--font-family);
+    text-decoration: none;
+    font-weight: 400;
+    
+    cursor: pointer;
+
+    transition: 0.125s background, 0.125s font-weight;
+
+    .material-symbols {
+        font-size: 20px;
+    }
+    > :first-child {
+        width: 24px;
+        height: 24px;
+        margin-left: 0.25em;
+        margin-right: 0.25em;
+        border-radius: 25%;
+        text-align: center;
+    }
+    i {
+        vertical-align: bottom;
+    }
+    
+    &:hover {
+        background: var(--fileEntry-hover-backgroundColor);
+        font-weight: bolder;
+    }
+    &[isopen="true"] {
+        background: var(--fileEntry-active-backgroundColor);
+        font-variation-settings: "FILL" 1;
+        font-weight: 700;
+    }
+}
+
+@mixin editorActionButton {
+    padding-block: 0.125em;
+
+    border: none;
+
+    background: var(--editorActionButton-background);
+
+    color: var(--editorActionButton-text);
+    font-size: 18px;
+    font-family: var(--font-family);
+    vertical-align: sub;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.125s background, 0.125s font-weight;
+    i {
+        vertical-align: bottom;
+    }
+    &:hover {
+        background: var(--editorActionButton-hover-background);
+        font-weight: bolder;
+    }
+    &.glowing {
+        background: var(--editorActionButton-active-background);
+        color: var(--editorActionButton-active-text);
+        pointer-events: none;
+        animation: glow 1s ease-in-out infinite;
+        &:hover {
+            background: var(--editorActionButton-active-hover-background);
+        }
+
+    }
+}
+
+.editorActionButton {
+    @include editorActionButton;
+    box-shadow: 0 0 10px var(--app-backgroundColor);
+    
+    height: 64px;
+    &:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    &:last-child{
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    i {
+        font-size:48px;
+        vertical-align: middle;
+    }
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5em;
+    gap: 0.125em;
+}
+#runButton {
+    background: hsl(var(--pid),87%,40%);
+    &:hover {
+        background: hsl(var(--pid),87%,42%);
+    }
+}
+
+.outlinedBtn {
+    font-family: var(--font-family);
+    border: 2px solid var(--text);
+    background: transparent;
+    color: var(--text);
+    font-size: 18px;
+    border-radius: 25px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.2s background, 0.2s color;
+    cursor: pointer;
+    margin-right: 0.5em;
+    font-weight: 600;
+    align-items: center;
+    display: inline-flex;
+    --hoverColor: var(--app-backgroundColor);
+    &.danger {
+        --text: var(--danger);
+        font-weight: 500;
+    }
+    .material-symbols {
+        font-size: 21px;
+        margin-right: 3px;
+    }
+    &:hover {
+        background: var(--text);
+        color: var(--hoverColor);
+    }
+
+}
+
+
+
+@keyframes glow {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@mixin glowing {
+    animation: glow 1s ease-in-out infinite;
+}
+.glowing {
+    @include glowing;
+}
+/*
+button:hover,a:hover {
+    .material-symbols {
+        font-variation-settings: "FILL" 1;
+    }
+}*/
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes disappear {
+    0% {
+        opacity: 1;
+    }
+    99% {
+        display: block;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.visible {
+    animation: appear 0.2s ease-in-out;
+}
+.invisible {
+    animation: disappear 0.2s ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}

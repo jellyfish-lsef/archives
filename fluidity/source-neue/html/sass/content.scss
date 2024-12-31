@@ -1,0 +1,100 @@
+@use "mixins";
+
+.contentPage {
+    padding:1em;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 100vh;;
+    .contentPageHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1em;
+        .contentPageHeaderImage {
+            height:100px;
+            width: 100px;
+            background-size: cover;
+            background-position: center;
+            margin-right:1em;
+            flex-shrink: 0;
+            background-color: #8888;
+        }
+        .contentPageHeaderInfo {
+            h1,h2 {
+                margin: 0;
+            }
+            h1 {
+                font-weight: 900;
+            }
+        }
+    }
+    .description {
+        width: 100%;
+        border:0;
+        flex-grow: 1;
+        align-self: stretch;
+    }
+}
+.content-user .contentPageHeaderImage {
+    border-radius: 100%;
+}
+.contentPage:not(.content-user) .contentPageHeaderImage {
+    border-radius: 25%;
+}
+.inlineUserImage {
+    height: 1em;
+    vertical-align: middle;
+    border-radius: 100%;
+}
+.rating {
+    .ratingBarHeader {
+        display: flex;
+        flex-direction: row;
+        .ratingBarButton {
+            background: none;
+            border: none;
+            font-family: var(--font-family);
+            font-size: 24px;
+            color: var(--text);
+            .material-symbols { 
+                vertical-align: middle; 
+            }
+            transition: 0.25s color, 0.25s font-weight, 0.25s font-variation-settings;
+        }
+        &[rating="like"] #likeButton {
+            color: var(--success);
+            font-weight: 800;
+            font-variation-settings:'FILL' 1,
+        }
+        &[rating="dislike"] #dislikeButton {
+            color: var(--danger);
+            font-weight: 800;
+            font-variation-settings:'FILL' 1,
+        }
+    }
+    progress {
+        width: 100%;
+        border-radius: 100%;
+        -webkit-appearance: none;
+        &::-webkit-progress-bar {
+            background-color: var(--danger);
+            border-radius: 16px;
+        }
+        &::-webkit-progress-value {
+            background-color: var(--success);
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
+            transition: 0.25s width;
+            &[style="width: 100%;"] {
+                border-radius: 16px;
+            }
+        }
+    }
+}
+.authorLink > .imgicon {
+    height: 1em;
+    width: 1em;
+    border-radius: 100%;
+}

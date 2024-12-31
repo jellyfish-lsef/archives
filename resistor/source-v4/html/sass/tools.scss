@@ -1,0 +1,18 @@
+#credits {
+    text-align: center;
+    opacity: 0.5;
+    transition: 0.2s opacity;
+}
+#credits:hover {
+    opacity: 1;
+}
+#credits a {
+    color: #fff;
+}
+.credits-footer {
+    opacity: 0;
+    transition: 1s opacity 0.5s;
+}
+.credits-footer:hover {
+    opacity: 1;
+}

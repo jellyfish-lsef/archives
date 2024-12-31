@@ -1,0 +1,326 @@
+@use "mixins";
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }       
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@mixin infoUnit($scale: 1) {
+    background: var(--infoUnit-background);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    color: var(--infoUnit-text);
+    box-shadow: rgba(0,0,0,0.3) 0px 2px 4px 0px;
+    gap: 0.25em;
+    padding: 0.5em;
+    margin-block: 0.75em;
+    > :nth-child(1) .material-symbols, > :nth-child(1).material-symbols {
+        font-size: $scale * 100%;
+        padding: 0.25em;
+        min-width: 48px;
+        text-align: center;
+    }
+    p {
+        margin: 0;
+    }
+    
+}
+
+
+
+body:not([loggedIn]) {
+
+    #trafficLightBackdrop {
+        display: none;
+    }
+    
+
+    #loginBackground {
+        opacity: 0.5;
+        transform-origin: top;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("./assets/img/sqooshed.jpg");
+        background-position: center left;
+        background-size: cover;
+        z-index: -1;
+        animation: fadeIn .25s ease-in-out;
+        -webkit-app-region: drag !important;
+    }
+    #loginBar {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+
+        display: grid;
+        grid-template-rows: auto min-content auto;
+        grid-row-gap: 1em;
+        grid-template-columns: 1fr minmax(auto, 500px) 1fr;
+        > * {grid-column: 2;}
+
+        text-align: center;
+        justify-items: stretch;
+        align-items: end;
+        animation: fadeIn .5s ease-in-out;
+
+        
+        #loginBarHeader {
+            width: 100%;
+            padding: 1em;
+            h1 {
+                font-size: 30px;
+                font-weight: 900;
+            }
+            filter: drop-shadow(0px 0px 16px rgba(0,0,0,0.5));
+            animation: hue-rotate-shadow 30s linear infinite;
+            img:hover {
+                animation: hue-rotate 1s ease-in-out;
+            }
+            @keyframes hue-rotate-shadow {
+                0% {
+                    filter: hue-rotate(0deg) saturate(100%)  drop-shadow(0px 0px 16px rgba(0,0,0,0.5));
+                }
+                40% {
+                    filter: hue-rotate(144deg) saturate(150%) drop-shadow(0px 0px 16px rgba(0,0,0,0.5));
+                }
+                100% {
+                    filter: hue-rotate(360deg) saturate(100%) drop-shadow(0px 0px 16px rgba(0,0,0,0.5));
+                }
+            }
+            @keyframes hue-rotate {
+                from { filter: hue-rotate(0deg) }
+                100% { filter: hue-rotate(360deg) }
+            }
+        }
+        #loginBarBody {
+            transition: 0.25s opacity;
+            align-self: center;
+            .errorText {
+                @include infoUnit(1.5);
+            }
+            .loading i {
+                font-size: 300%;
+                text-shadow: 0px 0px 16px rgba(0,0,0,0.5);
+                font-weight: 600;
+            }
+
+        }
+        
+        
+    }
+    .loginForm {
+        background: var(--loginForm-background);
+        border-radius: 8px;
+        box-shadow: rgba(0,0,0,0.3) 0px 2px 4px 0px;
+        input {
+            width: 100%;
+            box-shadow: none;
+            background: none;
+            padding:0.5em;
+            padding-left: 1.5em;
+            margin: 0;
+            color: var(--loginForm-text);
+            &:nth-child(2) {
+                border-top: 1px solid var(--loginForm-border);
+                border-radius: 0;
+            }
+        }
+        
+    }
+    .confirmButton {
+
+        width: 100%;
+        
+        padding-left: 1.5em;
+        padding-right: 0;
+        padding-block: 0.5em;   
+        
+        border: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        text-align: left;
+        font-size: 18px;
+        font-family: var(--font-family);
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.125s background, 0.125s font-weight;
+
+
+        background: var(--loginButton-active-background);
+        color: var(--loginButton-text);
+
+        &:hover {
+            background: var(--loginButton-active-hover-background);
+            font-weight: 750;
+            &::after {
+                font-weight: 800;
+            }
+        }
+
+        &::after {
+            content: "arrow_right_alt";
+            font-family: "Material Symbols Outlined";
+            font-weight: 300;
+            float: right;
+            margin-right: 1em;
+            display: block;
+        }
+    }
+
+    .loginLinks {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 0.25em;
+        > :first-child { text-align: right;}
+        > :last-child { text-align: left;}
+        a {
+            text-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+        }
+    }
+
+    .loginAccountContainer {
+        background-color: var(--loginForm-background);
+        font-family: var(--font-family);
+        border-radius: 8px;
+        box-shadow: rgba(0,0,0,0.3) 0px 2px 4px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        .loginAccount {
+            border: none;
+            background: none;
+            display:  grid;
+            grid-template-columns: 66px auto;
+            align-items: center;
+            padding: 0.25em;
+            padding-block: 0.5em;
+            .loginAccountIcon {
+                display: flex;
+                justify-content: center;
+                align-items: end;
+                img {
+                    height: 48px;
+                    width: 48px;
+                    border-radius: 100%;
+                }
+            }
+            color: var(--loginForm-text);
+            font-family: var(--font-family);
+            text-align: left;
+            .loginAccountText {
+                padding: 0.25em;
+                line-height: 1.7em;
+                p {
+                    opacity: 0.5;
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin: 0;
+                    transition: 0.25s font-weight;
+                }
+                b { 
+                    transition: 0.25s font-weight;
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+                span {
+                    font-size: 20px;
+                    font-weight: 400;
+                }
+            }
+            &:first-child {
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+            &:last-child {
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
+            &.primary {
+                background-color: var(--accent);
+                color: var(--text-on-accent);
+                
+            }
+            &:hover {
+                background-color: var(--loginButton-hover-background);
+                p {
+                    font-weight: 600;
+                }
+                b {
+                    font-weight: 900;
+                }
+                &.primary {
+                    background-color: var(--loginButton-active-hover-background);
+                }
+            }
+        }
+    }
+
+
+    #loginBarFooter {
+        img {
+            filter: grayscale(100%) brightness(100%);
+        }
+        opacity: 50%;
+        transition: 0.5s;
+        &:hover {
+            opacity: 100%;
+        }
+        p {
+            margin-top: 0;
+            .material-symbols {
+                font-size: 20px;
+                vertical-align: text-top;
+            }
+            a {
+                margin-right: 6px;
+            }
+        }
+    }
+    
+    .loginStatus {
+        @include infoUnit(2);
+        &[data-status] { opacity: 0.9; }
+        transition: 0.25s box-shadow, 0.25s opacity;
+        &:hover {
+            box-shadow: rgba(0,0,0,0.4) 0px 2px 8px 0px;
+            opacity: 1;
+        }
+        .loginStatusText{ 
+            
+            .loginStatusName {
+                font-size: 125%;
+                border-radius: 8px;
+                font-weight: 600;
+            }
+            flex-grow: 1;
+            overflow: hidden;
+            .loginStatusStatus {
+                font-size: 100%;
+                opacity: 0.5;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                display:block;
+            }
+        }
+    }
+}

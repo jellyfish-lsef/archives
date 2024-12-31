@@ -1,0 +1,431 @@
+/* (c) 2022 developer */
+@import url("./font/Gotham-SSm/stylesheet.css");
+/* (c) 2022 developer */
+#navbar {
+  background-image: linear-gradient(to left, #E51E10, #A20F05);
+  box-shadow: 0px 0px 18px 1px rgba(185, 47, 13, 0.6);
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  box-shadow: 0px 6px 18px 0px #0005;
+}
+
+#navbar-brand {
+  font-size: 25px;
+  font-weight: bolder;
+  padding-left: 7px;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#navbar-tabs {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.navbar-tab {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 20px;
+  opacity: 0.8;
+  transition: 0.2s font-weight, 0.2s opacity;
+}
+
+.navbar-tab:hover, .navbar-tab.active {
+  opacity: 1;
+}
+
+.navbar-tab.active {
+  font-weight: bold;
+  text-shadow: #fff7 0px 0px 5px;
+}
+
+#navbar-inject {
+  margin-right: 12px;
+}
+
+#page-editor {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+#editor-container {
+  flex-grow: 1;
+  justify-items: stretch;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.resistor-text-editor {
+  flex-grow: 1;
+}
+
+.resistor-text-editor:after {
+  content: " ";
+  background-image: url("./img/icon-win.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  top: 25%;
+  transition: 0.2s opacity;
+  z-index: -1;
+  filter: brightness(0.8) grayscale(100%);
+}
+
+/**
+ * hacky way to get the editor to resize when the window resizes
+ * tried using flexbox but it didn't work
+ */
+div.monaco-editor {
+  position: absolute;
+}
+
+@keyframes fade-in-fast {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.resistor-text-editor:not(.populated):after {
+  /*animation-name: fade-in;*/
+  animation-duration: 0.2s;
+}
+
+.resistor-text-editor > div {
+  /*animation-name: fade-in-fast;*/
+  animation-duration: 0.2s;
+}
+
+#scripts-sidebar {
+  width: 300px;
+  background: #222;
+  transition: 0.2s margin-right;
+}
+
+#scripts-sidebar.closed {
+  margin-right: -300px;
+}
+
+#script-sidebar-toggle {
+  position: fixed;
+  margin-left: -1em;
+  transition: 0.2s transform;
+}
+
+#scripts-sidebar.closed > #script-sidebar-toggle {
+  transform: scaleX(-1);
+}
+
+#scripts-sidebar-contents {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+}
+
+#credits {
+  text-align: center;
+  opacity: 0.5;
+  transition: 0.2s opacity;
+}
+
+#credits:hover {
+  opacity: 1;
+}
+
+#credits a {
+  color: #fff;
+}
+
+.credits-footer {
+  opacity: 0;
+  transition: 1s opacity 0.5s;
+}
+
+.credits-footer:hover {
+  opacity: 1;
+}
+
+/* (c) 2022 developer */
+/* (c) 2022 developer */
+.transparent-button {
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.2s background, 0.2s color;
+  cursor: pointer;
+}
+
+.transparent-button:not([disabled]):hover {
+  background: #fff;
+  color: #9e0a14;
+}
+
+.transparent-button[disabled] {
+  opacity: 0.8;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes speen {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fab {
+  background-image: linear-gradient(to left, #E51E10, #A20F05);
+  box-shadow: 0px 0px 18px 1px rgba(185, 47, 13, 0.6);
+  border-radius: 100%;
+  padding: 0.2em;
+  color: #fff;
+  aspect-ratio: 1/1;
+  font-size: 350%;
+  opacity: 0.8;
+  transition: 0.5s box-shadow, 0.2s opacity;
+}
+
+.fab:hover {
+  background-image: linear-gradient(to left, #E51E10, #A20F05);
+  box-shadow: 0px 0px 32px 1px rgba(185, 47, 13, 0.6);
+  opacity: 1;
+}
+
+.spin {
+  animation: spin 0.5s;
+}
+
+.speen {
+  animation: speen 0.5s;
+}
+
+#run-script {
+  position: fixed;
+  bottom: 0.36em;
+  margin-left: -2em;
+}
+
+.glowyLink {
+  color: #fff;
+  transition: 0.2s color, 0.2s text-shadow;
+  text-shadow: 0px 0px 0px #CA1115;
+}
+
+.glowyLink.active,
+.glowyLink:hover {
+  color: #CA1115;
+  text-shadow: 0px 0px 8px #CA1115;
+}
+
+.active > * > .glowyLink {
+  text-shadow: 0px 0px 0px #fff;
+  color: #fff;
+  opacity: 0.8;
+  transition: 0.2s opacity, 0.2s text-shadow;
+}
+
+.active > * > .glowyLink:hover {
+  color: #fff;
+  text-shadow: 0px 0px 5px #fff;
+  opacity: 1;
+}
+
+.script,
+.tab {
+  text-decoration: none;
+  vertical-align: middle;
+  font-family: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.1s background, 0.1s padding, 0.1s box-shadow;
+}
+
+.script *, .tab * {
+  cursor: pointer;
+}
+
+.script {
+  width: 100%;
+  padding-left: 12px;
+  overflow: hidden;
+}
+
+.script {
+  max-height: 1.3em;
+}
+
+.script-type-object:focus, .script-type-object:focus-within {
+  max-height: 9999999px;
+}
+
+.script-type-string:hover,
+.tab.active {
+  background: #CA1115;
+  color: #fff;
+  opacity: 100%;
+}
+
+.script-type-string:hover {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  box-shadow: 0px 0px 8px #CA1115;
+}
+
+.tab:not(.active):hover {
+  color: #fff;
+  background: #fff2;
+}
+
+.tab.active {
+  color: #fff;
+  text-shadow: 0px 0px 8px #fff;
+}
+
+.script .material-icons,
+.tab .material-icons {
+  align-self: center;
+  vertical-align: bottom;
+  font-size: 20px;
+}
+
+.script .material-icons {
+  margin-right: -2px;
+}
+
+#tabsContainer {
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  transition: 0.2s filter, 0.2s margin-left;
+}
+
+.tab {
+  height: 24px;
+  padding: 3px;
+  padding-bottom: 0px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+body,
+body *:not(.monaco-editor *),
+body > *:not(.monaco-editor > *) {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  animation: fade-in 0.5s;
+}
+
+*:not(.monaco-editor *):focus {
+  outline: 0;
+}
+
+body {
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Gotham SSm", "Menlo", monospace;
+  border: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+button,
+input {
+  font-family: "Gotham SSm", "Menlo", monospace;
+}
+
+#titlebar {
+  -webkit-app-region: drag !important;
+  height: 30px;
+  background: linear-gradient(to left, #E51E10, #A20F05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#app-content {
+  height: 100%;
+  width: 100%;
+  transition: 0.3s margin-left;
+  flex-grow: 1;
+}
+
+#app-content[page=editor] {
+  margin-left: 0;
+}
+
+#app-content[page=tools] {
+  margin-left: -100vw;
+}
+
+#app-content[page=scripthub] {
+  margin-left: -200vw;
+}
+
+.page {
+  width: 100vw;
+  height: calc(100vh - 30px - 55px);
+  /* JAAAAANNNKKKK!!!!*/
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#page-tools {
+  margin-left: 100vw;
+}
+
+#page-scripthub {
+  margin-left: 200vw;
+}
+
+.material-icons {
+  text-decoration: none;
+  vertical-align: sub;
+}
+
+/*# sourceMappingURL=index.css.map */

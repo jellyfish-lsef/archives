@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+      "target": "ES2015",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "allowJs": true,
+      "lib": ["dom", "ES2015"],
+      "outDir": "../bin",
+      "jsx": "react",
+      "jsxFactory": "h",
+      "jsxFragmentFactory": "Fragment",
+
+    },
+    "include": [
+      "./**/*.ts",
+      "./**/*.js",
+      "../assets/monaco-editor/monaco.d.ts",
+      "../../node_modules/electron/electron.d.ts", "login/LoginAvailability.tsx", "login/LoginScreen.tsx", "sidebar/vfs/frontend/VFSFolderRenderer.tsx", "mainAppUi.tsx",
+    ],
+    
+    "exclude": ["../node_modules", "**/*.spec.ts", "bin"],
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended"
+  }
